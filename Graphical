@@ -12,6 +12,7 @@ title("Graph");
 xlabel("X-Axis");
 ylabel("Y-Axis");
 grid on;
+
 %Phase 3: Find Corner Points with Axes
 position_x1 = find(x1 == 0);
 position_x21 = find(x21 == 0);
@@ -19,6 +20,7 @@ position_x22 = find(x22 == 0);
 
 Line1 = [x21(:, [position_x1 position_x21])];
 Line2 = [x22(:, [position_x1 position_x22])];
+
 
 %Phase 4: Find Points of Intersection
 pt = [0; 0]; 
@@ -38,9 +40,12 @@ end
 
 ptt = pt';
 P = unique(ptt, "rows"); 
+
+
 %Phase 5: Write All Corner Points
 b1 = P(:,1);
 b2 = P(:,2);
+
 %Phase 6: Find the Feasible Region
 cons1 = round((4*b1) + b2 - 6);
 s1 = find(cons1 > 0);
@@ -58,10 +63,13 @@ cons4 = round(-b2);
 s4 = find(cons4 > 0);
 P(s4, :) = [];
 
+
 %Phase 7: Compute Objective Function
 for i = 1:size(P, 1)
     fn(i, :) = sum(P(i, :) .* c);
 end
+
+
 %Phase 8: Find the Optimal Solution
 optimal = max(fn);
 
